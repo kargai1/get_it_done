@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ColorThemeData().createPrefObject();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<ItemData>(
         create: (BuildContext context) => ItemData()),
@@ -24,12 +26,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState() {
-    Provider.of<ColorThemeData>(context).readyPref();
-    super.initState();
-  }
-
   Widget build(BuildContext context) {
+    Provider.of<ColorThemeData>(context).loadPref();
     return MaterialApp(
       theme: Provider.of<ColorThemeData>(context).selectedThemeData,
       home: HomePage(),
