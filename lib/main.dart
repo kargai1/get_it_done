@@ -6,9 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await ColorThemeData().createPref();
-
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<ItemData>(
         create: (BuildContext context) => ItemData()),
@@ -18,13 +15,21 @@ void main() async {
   ], child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    Provider.of<ColorThemeData>(context).readyPref();
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
-    Provider.of<ColorThemeData>(context).getPref();
     return MaterialApp(
       theme: Provider.of<ColorThemeData>(context).selectedThemeData,
       home: HomePage(),
