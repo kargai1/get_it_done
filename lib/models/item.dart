@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Item {
   final String? title;
   bool isDone;
@@ -6,4 +10,10 @@ class Item {
   void toggleStatus() {
     isDone = !isDone;
   }
+
+  Item.fromMap(Map map)
+      : title = map['title'],
+        isDone = map['isDone'];
+
+  Map<String, dynamic> toMap() => {'title': title, 'isDone': isDone};
 }

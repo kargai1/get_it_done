@@ -23,7 +23,7 @@ class ItemCart extends StatelessWidget {
     return GestureDetector(
       onDoubleTap: removeItem,
       child: Card(
-        color: isDone ? Colors.green.shade100 : Colors.white,
+        color: isDone ? Colors.grey[350] : Colors.white,
         elevation: isDone ? 1 : 5,
         shadowColor: Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(
@@ -41,7 +41,7 @@ class ItemCart extends StatelessWidget {
             trailing: Checkbox(
               onChanged: toggleStatus,
               value: isDone,
-              activeColor: Colors.green,
+              activeColor: Theme.of(context).primaryColor,
             ),
           ),
         ),

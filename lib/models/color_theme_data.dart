@@ -58,5 +58,6 @@ class ColorThemeData with ChangeNotifier {
   void loadPref() async {
     _sharedPref ??= await SharedPreferences.getInstance();
     _isGreen = await _sharedPref?.getBool('themeData') ?? true;
+    notifyListeners();
   }
 }
